@@ -8,7 +8,7 @@ class RegistrationController extends Controller
 {
     public function index()
     {
-        return view("form");
+        return view("comp-form");
     }
 
     // get form data with validation 
@@ -18,7 +18,8 @@ class RegistrationController extends Controller
             [
                 'username'=>'required',
                 'email'=>'required|email',
-                'password'=>'required',
+                'password'=>'required|confirmed',
+                'password_confirmation'=>'required',
 
             ]
             );

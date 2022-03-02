@@ -1,37 +1,74 @@
-@extends('layouts.main')    
+@extends('layouts.main')
 
 @push('title')
-    <title>Register compnent page </title>
+<title>Register compnent page </title>
 @endpush
 
 {{-- this is main body parser container  --}}
 @section('body-content')
 <h1>Register </h1>
-<form action="{{url('/')}}/register" method="post" >
+<form action="{{url('/')}}/register" method="post" class="row">
 
     @csrf
+    <x-input type="text" name="name" value="{{old('name')}}" label="Enter Name" />
+    @error('name')
+    {{$message}}<br>
+    @enderror
 
-       <x-input type="text" name="username"  value="{{old('username')}}" label="Enter username"/>
-        @error('username')
-            {{$message}}<br>
-        @enderror 
+    <x-input type="email" name="email" value="{{old('email')}}" label="Enter Email" />
+    @error('email')
+    {{$message}}<br>
+    @enderror
 
-       <x-input type="email" name="email" value="{{old('email')}}" label="Enter Email"/>
-        @error('email')
-        {{$message}}<br>
-        @enderror 
+    <div class="mb-3 col-md-6">
+        <label for="male" class="form-label" class="form-label">Your Gender </label>
+        <br>
+        <label for="male" class="form-label" class="form-label">Male </label>
+        <input type="radio" name="gender" value="M" id="male" />
+        <label for="female" class="form-label" class="form-label">Female </label>
+        <input type="radio" name="gender" value="F" id="female" />
+        <label for="other" class="form-label" class="form-label">Other </label>
+        <input type="radio" name="gender" value="O" id="other" />
+    </div>
 
-       <x-input type="password" name="password" label="Enter password"/>
-       
-       <x-input type="password" name="password_confirmation" label="Confirm password"/>
-       @error('password')
-       {{$message}}<br>
-       @enderror 
+    @error('gender')
+    {{$message}}<br>
+    @enderror
 
-       <button type="submit">Submit</button>
-        
+    <div class="mb-3 col-md-6">
+        <label for="address">Your address</label>
+        <textarea name="address" id="address"  cols="10" rows="4" class="form-control">{{old('address')}}</textarea>
+    </div>
+    @error('address')
+    {{$message}}<br>
+    @enderror
+
+    <x-input type="text" name="state" value="{{old('state')}}" label="Enter state" />
+    @error('state')
+    {{$message}}<br>
+    @enderror
+
+    <x-input type="text" name="country" value="{{old('country')}}" label="Enter country" />
+    @error('country')
+    {{$message}}<br>
+    @enderror
+
+    <x-input type="date" name="dob" value="{{old('dob')}}" label="Enter date of birth" />
+    @error('dob')
+    {{$message}}<br>
+    @enderror
+
+
+    <x-input type="password" name="password" label="Password" />
+
+    <x-input type="password" name="password_confirmation" label="Confirm password" />
+    @error('password')
+    {{$message}}<br>
+    @enderror
+    <div class="col-md-3">
+
+        <button type="submit" class="btn btn-success">Submit</button>
+    </div>
+
 </form>
 @endsection
-
-
-

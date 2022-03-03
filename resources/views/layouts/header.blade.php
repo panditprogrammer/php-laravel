@@ -47,7 +47,7 @@
 <nav>
     <a href="/">home</a>
     <a href="/register">Register</a>
-    <a href="/customer">customer</a>
+    <a href="/show-customer">Show customer</a>
     <a href="/about">about</a>
     <a href="/service">service</a>
 </nav>

@@ -12,21 +12,31 @@ class RegistrationController extends Controller
         return view("comp-form");
     }
 
+    public function showCustomer()
+    {
+        $customer = Customer::all();
+        $data = compact('customer'); // send the $customer variable 
+        return view("show-customer")->with($data);
+    }
+
     // get form data with validation 
     public function register(Request $res)
     {
-        // $res->validate(
-        //     [
-        //         'username'=>'required',
-        //         'email'=>'required|email',
-        //         'password'=>'required|confirmed',
-        //         'password_confirmation'=>'required',
+        $res->validate(
+            [
+                'name'=>'required',
+                'email'=>'required|email',
+                'gender'=>'required',
+                'address'=>'required',
+                'state'=>'required',
+                'country'=>'required',
+                'dob'=>'required',
+                'password'=>'required|confirmed',
+                'password_confirmation'=>'required',
 
-        //     ]
-        //     );
+            ]
+            );
 
-        echo "<pre>";
-        print_r($res->all());
 
         // insert the data in to database 
         $customer = new Customer;
@@ -42,5 +52,7 @@ class RegistrationController extends Controller
 
 
     }
+
+
     
 }

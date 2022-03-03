@@ -10,14 +10,14 @@
 <form action="{{url('/')}}/register" method="post" class="row">
 
     @csrf
-    <x-input type="text" name="name" value="{{old('name')}}" label="Enter Name" />
+    <x-input type="text" name="name" value="{{old('name')}}" label="Enter Name"  />
     @error('name')
-    {{$message}}<br>
+    {{$message}}
     @enderror
 
     <x-input type="email" name="email" value="{{old('email')}}" label="Enter Email" />
     @error('email')
-    {{$message}}<br>
+    {{$message}}
     @enderror
 
     <div class="mb-3 col-md-6">
@@ -32,7 +32,7 @@
     </div>
 
     @error('gender')
-    {{$message}}<br>
+    {{$message}}
     @enderror
 
     <div class="mb-3 col-md-6">
@@ -40,22 +40,22 @@
         <textarea name="address" id="address"  cols="10" rows="4" class="form-control">{{old('address')}}</textarea>
     </div>
     @error('address')
-    {{$message}}<br>
+    {{$message}}
     @enderror
 
     <x-input type="text" name="state" value="{{old('state')}}" label="Enter state" />
     @error('state')
-    {{$message}}<br>
+    {{$message}}
     @enderror
 
     <x-input type="text" name="country" value="{{old('country')}}" label="Enter country" />
     @error('country')
-    {{$message}}<br>
+    {{$message}}
     @enderror
 
     <x-input type="date" name="dob" value="{{old('dob')}}" label="Enter date of birth" />
     @error('dob')
-    {{$message}}<br>
+    {{$message}}
     @enderror
 
 
@@ -63,7 +63,7 @@
 
     <x-input type="password" name="password_confirmation" label="Confirm password" />
     @error('password')
-    {{$message}}<br>
+    {{$message}}
     @enderror
     <div class="col-md-3">
 

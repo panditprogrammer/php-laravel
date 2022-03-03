@@ -32,12 +32,9 @@ Route::get("/service",SingleActionController::class);
 
 Route::get("/register",[RegistrationController::class,"index"]);
 Route::post("/register",[RegistrationController::class,"register"]);
+Route::get("/show-customer",[RegistrationController::class,"showCustomer"]);
 
-Route::get("/customer",function (){
-    $customers = Customer::all();
-    echo "<pre>";
-    print_r($customers->toArray());
-});
+
 
 
 

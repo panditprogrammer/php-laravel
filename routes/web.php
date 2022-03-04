@@ -29,10 +29,18 @@ Route::get("/service",[TestController::class,"service"]);
 Route::get("/service",SingleActionController::class);
 
 
-
+// show the form  to register 
 Route::get("/register",[RegistrationController::class,"index"]);
+// get the form data 
 Route::post("/register",[RegistrationController::class,"register"]);
+// show the data in table 
 Route::get("/show-customer",[RegistrationController::class,"showCustomer"]);
+// delete data 
+Route::get("/delete-customer/{id}",[RegistrationController::class,"deleteCustomer"]);
+// fetching the data for update
+Route::get("/edit-customer/{id}",[RegistrationController::class,"editCustomer"]);
+// updating the data 
+Route::post("/update-customer/{id}",[RegistrationController::class,"updateCustomer"]);
 
 
 

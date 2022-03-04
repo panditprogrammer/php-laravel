@@ -11,7 +11,7 @@
 <div class="table-responsive">
     <table class="table">
         <thead>
-            <tr>
+            <tr class="text-center">
                 <th>Name</th>
                 <th>Email</th>
                 <th>Gender </th>
@@ -20,6 +20,8 @@
                 <th>Country</th>
                 <th>DOB</th>
                 <th>status</th>
+                <th colspan="2">Action</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -41,15 +43,17 @@
                 <td>{{$customer->address}}</td>
                 <td>{{$customer->state}}</td>
                 <td>{{$customer->country}}</td>
-                <td>{{$customer->dob}}</td>
+                <td>{{myDateFormat($customer->dob,"d-m-Y")}}</td>
 
                 <td>
                     @if ($customer->status == 1)
-                    {{"Active"}}
+                      <span class="badge bg-success"> {{"Active"}} </span>
                     @else
-                    {{"Inactive"}}
+                    <span class="badge bg-danger"> {{"Inactive"}} </span>
                     @endif
                 </td>
+                <td> <a href="{{'/delete-customer'}}/{{$customer->customer_id}}" class="btn btn-danger">Delete</a></td>
+                <td><a href="{{'/edit-customer'}}/{{$customer->customer_id}}" class="btn btn-warning">Edit</a></td>
             </tr>
             @endforeach
         </tbody>

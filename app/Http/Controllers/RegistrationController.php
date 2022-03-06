@@ -6,13 +6,15 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 use LDAP\Result;
 
+use function PHPUnit\Framework\isNull;
+
 class RegistrationController extends Controller
 {
     public function index()
-    {   
+    {
         $form_title = "Customer Registration ";
-        $url = url('/').'/register';
-        $data = compact('url','form_title');
+        $url = url('/') . '/register';
+        $data = compact('url', 'form_title');
         return view("comp-form")->with($data);
     }
 
@@ -23,6 +25,39 @@ class RegistrationController extends Controller
         $data = compact('customer'); // send the $customer variable 
         return view("show-customer")->with($data);
     }
+
+
+
+    // soft delete customer ***********************
+    public function showSoftDelete()
+    {
+        $customer = Customer::onlyTrashed()->get();
+        $data = compact('customer'); // send the $customer variable 
+        return view("customer-trash")->with($data);
+    }
+
+    // restore deleted customer from softDelete
+   public function restoreCustomer($id)
+   {
+       $customer = Customer::withTrashed()->find($id);
+       if(!is_null($customer))
+       {
+           $customer->restore();
+       }
+       return redirect()->back();
+   }
+
+   // delete permanently
+   public function deleteCustomerForever($id)
+   {
+       $customer = Customer::withTrashed()->find($id);
+       if(!is_null($customer)){
+           $customer->forceDelete();
+       }
+       return redirect()->back();
+   }
+
+
 
     public function deleteCustomer($id)
     {
@@ -41,8 +76,8 @@ class RegistrationController extends Controller
         $form_title = "Customer update details ";
         $customer = Customer::find($id);
         if (!is_null($customer)) {
-            $url = url('/')."/update-customer"."/".$id;
-            $data = compact('customer','url','form_title');
+            $url = url('/') . "/update-customer" . "/" . $id;
+            $data = compact('customer', 'url', 'form_title');
             return view("comp-form")->with($data);
         } else {
             return redirect("show-customer");
@@ -50,18 +85,18 @@ class RegistrationController extends Controller
     }
 
     // update the data in database 
-    public function updateCustomer($id,Request $request)
+    public function updateCustomer($id, Request $request)
     {
         // find the data in table using primary key 
         $customer = Customer::find($id);
         if (!is_null($customer)) {
-            $customer->name = $request["name"]; 
-            $customer->email = $request["email"]; 
-            $customer->gender = $request["gender"]; 
-            $customer->address = $request["address"]; 
-            $customer->state = $request["state"]; 
-            $customer->country = $request["country"]; 
-            $customer->dob = $request["dob"]; 
+            $customer->name = $request["name"];
+            $customer->email = $request["email"];
+            $customer->gender = $request["gender"];
+            $customer->address = $request["address"];
+            $customer->state = $request["state"];
+            $customer->country = $request["country"];
+            $customer->dob = $request["dob"];
             $customer->save();
             return redirect("show-customer");
         }

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\SingleActionController;
 use App\Models\Customer;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,36 @@ Route::get("/delete-customer/{id}",[RegistrationController::class,"deleteCustome
 Route::get("/edit-customer/{id}",[RegistrationController::class,"editCustomer"]);
 // updating the data 
 Route::post("/update-customer/{id}",[RegistrationController::class,"updateCustomer"]);
+
+// show softDeletes page 
+Route::get("/customer-trash",[RegistrationController::class,"showSoftDelete"]);
+// restore softDeletes 
+Route::get("/restore-customer/{id}",[RegistrationController::class,"restoreCustomer"]);
+// delete permanently of softDelete
+Route::get("/delete-customer-trash/{id}",[RegistrationController::class,"deleteCustomerForever"]);
+
+
+
+
+Route::get("/get-session",function(){
+    printRaw(session()->all());
+});
+
+Route::get("/set-session",function(Request $request){
+    $request->session()->put("username","Panditprogrammer");
+    $request->session()->put("userId","1234");
+    $request->session()->flash("sampleKey","sampleValue"); // only one time
+    return redirect("get-session");
+});
+
+Route::get("/destroy",function(){
+    session()->forget("username");
+    return redirect("get-session");
+});
+
+
+
+
 
 
 

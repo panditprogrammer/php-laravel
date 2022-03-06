@@ -1,12 +1,12 @@
 @extends('layouts.main')
 
 @push('title')
-<title>Show Customer page </title>
+<title>softDelete Manage page </title>
 @endpush
 
 {{-- this is main body parser container  --}}
 @section('body-content')
-<h1>All Customer Details </h1>
+<h1>All Deleted Customers Details </h1>
 
 <div class="table-responsive">
     <table class="table">
@@ -52,8 +52,8 @@
                     <span class="badge bg-danger"> {{"Inactive"}} </span>
                     @endif
                 </td>
-                <td> <a href="{{'/delete-customer'}}/{{$customer->customer_id}}" class="badge bg-danger">Trash</a></td>
-                <td><a href="{{'/edit-customer'}}/{{$customer->customer_id}}" class="badge bg-warning">Edit</a></td>
+                <td> <a href="{{'/delete-customer-trash'}}/{{$customer->customer_id}}" class="btn btn-danger">Delete</a></td>
+                <td><a href="{{'/restore-customer'}}/{{$customer->customer_id}}" class="btn btn-warning">Restore</a></td>
             </tr>
             @endforeach
         </tbody>

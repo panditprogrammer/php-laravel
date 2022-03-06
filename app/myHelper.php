@@ -1,4 +1,5 @@
 <?php
+// this is our custom helper file 
 if(!function_exists("p"))
 {
     function p()
@@ -10,6 +11,11 @@ if(!function_exists("p"))
     {
         return date($format,strtotime($date));
     }
-
+    
+    function printRaw($data){
+        echo "<pre>";
+        print_r($data);
+        echo "</pre>";
+    }
 }
 ?>

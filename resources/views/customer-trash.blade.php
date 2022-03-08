@@ -47,13 +47,13 @@
 
                 <td>
                     @if ($customer->status == 1)
-                      <span class="badge bg-success"> {{"Active"}} </span>
+                      <span class="text-success"> {{"Active"}} </span>
                     @else
-                    <span class="badge bg-danger"> {{"Inactive"}} </span>
+                    <span class="text-danger"> {{"Inactive"}} </span>
                     @endif
                 </td>
-                <td> <a href="{{'/delete-customer-trash'}}/{{$customer->customer_id}}" class="btn btn-danger">Delete</a></td>
-                <td><a href="{{'/restore-customer'}}/{{$customer->customer_id}}" class="btn btn-warning">Restore</a></td>
+                <td> <a href="{{'/delete-customer-trash'}}/{{$customer->customer_id}}" class="badge bg-danger">Delete</a></td>
+                <td><a href="{{'/restore-customer'}}/{{$customer->customer_id}}" class="badge bg-warning">Restore</a></td>
             </tr>
             @endforeach
         </tbody>

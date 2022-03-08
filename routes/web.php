@@ -57,12 +57,12 @@ Route::get("/get-session",function(){
     printRaw(session()->all());
 });
 
-Route::get("/set-session",function(Request $request){
-    $request->session()->put("username","Panditprogrammer");
-    $request->session()->put("userId","1234");
-    $request->session()->flash("sampleKey","sampleValue"); // only one time
-    return redirect("get-session");
-});
+// Route::get("/set-session",function(Request $request){
+//     $request->session()->put("username","Panditprogrammer");
+//     $request->session()->put("userId","1234");
+//     $request->session()->flash("sampleKey","sampleValue"); // only one time
+//     return redirect("get-session");
+// });
 
 Route::get("/destroy",function(){
     session()->forget("username");

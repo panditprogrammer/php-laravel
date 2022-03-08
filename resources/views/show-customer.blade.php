@@ -47,9 +47,9 @@
 
                 <td>
                     @if ($customer->status == 1)
-                      <span class="badge bg-success"> {{"Active"}} </span>
+                      <span class="text-success"> {{"Active"}} </span>
                     @else
-                    <span class="badge bg-danger"> {{"Inactive"}} </span>
+                    <span class="text-danger"> {{"Inactive"}} </span>
                     @endif
                 </td>
                 <td> <a href="{{'/delete-customer'}}/{{$customer->customer_id}}" class="badge bg-danger">Trash</a></td>

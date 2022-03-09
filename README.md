@@ -1,3 +1,17 @@
+# PHP Laravel complete basic to advance tutorial by Pandit Programmer 
+
+## Installation of PHP Laravel
+Create project for php laravel and start development server 
+
+## create a new laravel project 
+```laravel new  Your_project_ame
+```
+
+##  start developement server 
+```php artisan serve
+```
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">

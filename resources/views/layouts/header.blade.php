@@ -44,10 +44,10 @@
                         <a class="nav-link active" aria-current="page" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/register">Register</a>
+                        <a class="nav-link" href="/customer/register">Register</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/show-customer">Show Customer</a>
+                        <a class="nav-link" href="/customer/show">Show Customer</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/customer-trash">Manage Trash</a>
@@ -61,8 +61,8 @@
                         <a class="nav-link" href="/service">Service</a>
                     </li>
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <form action="/customer/show" method="GET" class="d-flex">
+                    <input class="form-control me-2" name="search" type="search" placeholder="Name, Email, Country" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
             </div>

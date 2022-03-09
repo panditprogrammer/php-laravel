@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use Database\Seeders\CustomerSeeder;
 use Illuminate\Http\Request;
 use LDAP\Result;
 
@@ -13,16 +14,23 @@ class RegistrationController extends Controller
     public function index()
     {
         $form_title = "Customer Registration ";
-        $url = url('/') . '/register';
+        $url = url('/') . '/customer/register';
         $data = compact('url', 'form_title');
         return view("comp-form")->with($data);
     }
 
     // show all customer 
-    public function showCustomer()
+    public function showCustomer(Request $request)
     {
-        $customer = Customer::all();
-        $data = compact('customer'); // send the $customer variable 
+        $searchKey = $request["search"] ?? "";
+        if($searchKey != ""){
+            // $customers = Customer::where("name", "LIKE","%$searchKey%")->orWhere("email", "LIKE","%$searchKey%")->orWhere("country", "LIKE","%$searchKey%")->get();
+            $customers = Customer::paginate(15);
+        } else{
+            // $customer = Customer::all();
+            $customers = Customer::paginate(15);
+        }
+        $data = compact('customers',"searchKey"); // send the $customer variable 
         return view("show-customer")->with($data);
     }
 
@@ -66,7 +74,7 @@ class RegistrationController extends Controller
         if (!is_null($customer)) {
             $customer->delete();
         }
-        return redirect("show-customer");
+        return redirect("/customer/show");
     }
 
     // fetch data from database and show the form to edit 
@@ -76,11 +84,11 @@ class RegistrationController extends Controller
         $form_title = "Customer update details ";
         $customer = Customer::find($id);
         if (!is_null($customer)) {
-            $url = url('/') . "/update-customer" . "/" . $id;
+            $url = url('/') . "/customer/update" . "/" . $id;
             $data = compact('customer', 'url', 'form_title');
             return view("comp-form")->with($data);
         } else {
-            return redirect("show-customer");
+            return redirect("/customer/show");
         }
     }
 
@@ -98,9 +106,9 @@ class RegistrationController extends Controller
             $customer->country = $request["country"];
             $customer->dob = $request["dob"];
             $customer->save();
-            return redirect("show-customer");
+            return redirect("/customer/show");
         }
-        return redirect("show-customer");
+        return redirect("/customer/show");
     }
 
     // get form data with validation 

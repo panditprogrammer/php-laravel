@@ -21,39 +21,47 @@ use Illuminate\Http\Request;
 // *************************** controller base routing ***************************
 //                      call the controller if route is request 
 // *************************** ok ************************************************
-Route::get("/",[TestController::class,"index"]);
-Route::get("/about",[TestController::class,"about"]);
-Route::get("/service",[TestController::class,"service"]);
+Route::get("/", [TestController::class, "index"]);
+Route::get("/about", [TestController::class, "about"]);
+Route::get("/service", [TestController::class, "service"]);
 
 
 // use single action controller 
-Route::get("/service",SingleActionController::class);
+Route::get("/service", SingleActionController::class);
 
 
-// show the form  to register 
-Route::get("/register",[RegistrationController::class,"index"]);
-// get the form data 
-Route::post("/register",[RegistrationController::class,"register"]);
-// show the data in table 
-Route::get("/show-customer",[RegistrationController::class,"showCustomer"]);
-// delete data 
-Route::get("/delete-customer/{id}",[RegistrationController::class,"deleteCustomer"]);
-// fetching the data for update
-Route::get("/edit-customer/{id}",[RegistrationController::class,"editCustomer"]);
-// updating the data 
-Route::post("/update-customer/{id}",[RegistrationController::class,"updateCustomer"]);
+// grouping the routes 
+Route::group(["prefix"=> "/customer"], function () {
+    // show the form  to register 
+    Route::get("/register", [RegistrationController::class, "index"]);
+    // get the form data 
+    Route::post("/register", [RegistrationController::class, "register"]);
+    // show the data in table 
+    Route::get("/show", [RegistrationController::class, "showCustomer"]);
+    // delete data 
+    Route::get("/delete/{id}", [RegistrationController::class, "deleteCustomer"]);
+    // fetching the data for update
+    Route::get("/edit/{id}", [RegistrationController::class, "editCustomer"]);
+    // updating the data 
+    Route::post("/update/{id}", [RegistrationController::class, "updateCustomer"]);
+});
 
 // show softDeletes page 
-Route::get("/customer-trash",[RegistrationController::class,"showSoftDelete"]);
+Route::get("/customer-trash", [RegistrationController::class, "showSoftDelete"]);
 // restore softDeletes 
-Route::get("/restore-customer/{id}",[RegistrationController::class,"restoreCustomer"]);
+Route::get("/restore-customer/{id}", [RegistrationController::class, "restoreCustomer"]);
 // delete permanently of softDelete
-Route::get("/delete-customer-trash/{id}",[RegistrationController::class,"deleteCustomerForever"]);
+Route::get("/delete-customer-trash/{id}", [RegistrationController::class, "deleteCustomerForever"]);
+
+
+// router grouping 
 
 
 
 
-Route::get("/get-session",function(){
+
+
+Route::get("/get-session", function () {
     printRaw(session()->all());
 });
 
@@ -64,16 +72,10 @@ Route::get("/get-session",function(){
 //     return redirect("get-session");
 // });
 
-Route::get("/destroy",function(){
+Route::get("/destroy", function () {
     session()->forget("username");
     return redirect("get-session");
 });
-
-
-
-
-
-
 
 
 

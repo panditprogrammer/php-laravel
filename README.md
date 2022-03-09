@@ -1,6 +1,6 @@
 # PHP Laravel complete basic to advance tutorial by Pandit Programmer 
 
-## Installation of PHP Laravel
+## After Installation of PHP Laravel
 Create project for php laravel and start development server 
 
 ```
